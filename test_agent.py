@@ -47,7 +47,8 @@ async def main():
         print("Usage: python test_agent.py 'Your question'"); return
     q = " ".join(sys.argv[1:])
     try:
-        async for r in agent.run_live(q):
+        print("Input schema:", getattr(agent, "input_schema", None))
+        async for r in agent.run_live({"input": q}):
             print(r)
     except Exception as e:
         print("Error:", e)
